@@ -11,60 +11,70 @@ import com.bridgelabz.addressbookapp.model.AddressBookData;
 @Service
 public class AddressBookService implements IAddressBookService {
 
+	private List<AddressBookData> addressBookList = new ArrayList<>();
+
 	/**
 	 * Call Get method
+	 * 
 	 * @return : Http Status & Contact details of the employee
 	 */
 	@Override
 	public List<AddressBookData> getAddressBookData() {
-		List<AddressBookData> addressBookList = new ArrayList<>();
-		addressBookList.add(new AddressBookData(1, new AddressBookDTO("Dhanashree", "Hakke", "Kavalapur", "Sangli", 8421731310l)));
 		return addressBookList;
 	}
 
 	/**
 	 * Call Get method
+	 * 
 	 * @param id : contact Id
 	 * @return : Contact details of the employee
 	 */
 	@Override
-	public AddressBookData getAddressBookDataById(int id) {
-		AddressBookData contactData = null;
-		contactData = new AddressBookData(1, new AddressBookDTO("Dhanashree", "Hakke", "Kavalapur", "Sangli", 8421731310l));
-		return contactData;
+	public AddressBookData getAddressBookDataById(int contactId) {
+
+		return addressBookList.get(contactId - 1);
 	}
 
 	/**
 	 * Call post method to add details
-	 * @param addressBookDTO : details id, First name, Last name, Address, City & phoneNum
+	 * 
+	 * @param addressBookDTO : details id, Firstname, Lastname, Address, City &
+	 *                       phoneNum
 	 * @return : details
 	 */
 	@Override
 	public AddressBookData createAddressBookData(AddressBookDTO addressBookDTO) {
 		AddressBookData contactData = null;
-		contactData = new AddressBookData(1, addressBookDTO);
+		contactData = new AddressBookData(addressBookList.size() + 1, addressBookDTO);
+		addressBookList.add(contactData);
 		return contactData;
 	}
 
 	/**
 	 * Call put method to update details
-	 * @param addressBookDTO : details id, First name, Last name, Address, City & phoneNum
+	 * 
+	 * @param addressBookDTO : details id, First name, Last name, Address, City &
+	 *                       phoneNum
 	 * @return : details
 	 */
 	@Override
-	public AddressBookData updateAddressBookData(int id, AddressBookDTO addressBookDTO) {
-		AddressBookData contactData = null;
-		contactData = new AddressBookData(1, addressBookDTO);
+	public AddressBookData updateAddressBookData(int contactId, AddressBookDTO addressBookDTO) {
+		AddressBookData contactData = this.getAddressBookDataById(contactId);
+		contactData.setFirstName(addressBookDTO.firstName);
+		contactData.setLastName(addressBookDTO.lastName);
+		addressBookList.set(contactId - 1, contactData);
 		return contactData;
 	}
 
 	/**
 	 * Call delete method to remove address book details
+	 * 
 	 * @param empId : Address book id
 	 * @return : contact id which is deleted
 	 */
 	@Override
-	public void deleteAddressBookData(int id) {
-		
+	public void deleteAddressBookData(int contactId) {
+		addressBookList.remove(contactId - 1);
+
 	}
 }
