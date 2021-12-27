@@ -15,6 +15,12 @@ import com.bridgelabz.addressbookapp.dto.ResponseDTO;
 @ControllerAdvice
 public class AddressBookAppExceptionHandler {
 
+	/**
+	 * handle any Exception thrown
+	 * 
+	 * @param : exception
+	 * @return : ResponseEntity of Exception and HttpStatus
+	 */
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ResponseDTO> handleMethodArgumentNotValidException(
 			MethodArgumentNotValidException exception) {
@@ -23,6 +29,17 @@ public class AddressBookAppExceptionHandler {
 				.collect(Collectors.toList());
 
 		ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST request", errorMessage);
+		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
+	}
+
+	/**
+	 * handle when address book Id not found
+	 * @param exception
+	 * @return : ResponseEntity of Exception and HttpStatus
+	 */
+	@ExceptionHandler(AddressBookException.class)
+	public ResponseEntity<ResponseDTO> handlerEmployeePayrollException(AddressBookException exception) {
+		ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST Request ", exception.getMessage());
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
 	}
 }
