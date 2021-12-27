@@ -31,7 +31,7 @@ public class AddressBookAppController {
 	 * Call Get method
 	 * @return : Http Status & Contact details of the employee
 	 */
-	@RequestMapping(value = {"","/","/get"})
+	@RequestMapping(value = {"/get"})
 	public ResponseEntity<ResponseDTO> getAddressBookData(){
 		List<AddressBookData> addressBookList = null;
 		addressBookList = addressBookService.getAddressBookData();
