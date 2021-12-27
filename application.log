@@ -599,3 +599,4 @@ Caused by: java.sql.SQLSyntaxErrorException: Access denied for user 'addressbook
 	at org.hibernate.resource.transaction.backend.jdbc.internal.DdlTransactionIsolatorNonJtaImpl.getIsolatedConnection(DdlTransactionIsolatorNonJtaImpl.java:44) ~[hibernate-core-5.6.3.Final.jar:5.6.3.Final]
 	... 41 common frames omitted
 
+2021-12-27 20:27:01.974  WARN 5148 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
